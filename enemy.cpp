@@ -11,6 +11,11 @@ Enemy::Enemy(int x, int y)
 	this->position.second = y;
 }
 
+pair<int, int> Enemy::getPosition()
+{
+	return position;
+}
+
 void Enemy::moveDown()
 {
 	this->position.second += speed;
