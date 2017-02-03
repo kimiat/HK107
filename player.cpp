@@ -6,6 +6,7 @@ Player::Player(int x, int y, int width, int height)
     this->y = y;
     this->height = height;
     this->width = width;
+    fuel = 500;
 }
 
 void Player::move_left()
@@ -16,6 +17,16 @@ void Player::move_left()
 void Player::move_right()
 {
     x += 5;
+}
+
+void Player::inc_fuel()
+{
+    fuel += 10;
+}
+
+void Player::dec_fuel()
+{
+    fuel -= 3;
 }
 int Player::get_x()
 {
