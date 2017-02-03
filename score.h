@@ -2,14 +2,14 @@
 
 using namespace std;
 
-enum Object {SHIP, HELICOPTER, JET, BALLOON};
+enum Object {SHIP = 30, HELICOPTER = 60, BALLOON = 60, JET = 100};
 
 class Score
 {
 private:
-	int value;
+	unsigned int value;
 public:
 	Score();
-	int getScore();
+	unsigned int getScore();
 	void addScore(Object destroyed);
 };
