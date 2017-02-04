@@ -1,8 +1,10 @@
 #ifndef PLAYER
 #define PLAYER
 
+#include<QGraphicsRectItem>
 #include "missile.h"
-class Player{
+
+class Player :public QGraphicsRectItem{
     private:
         int x;
         int y;
@@ -17,7 +19,10 @@ class Player{
         void dec_fuel();
         int get_x();
         int get_y();
-        missile* shoot();
+        int get_height();
+        int get_width();
+        void shoot();
+        void keyPressEvent(QKeyEvent *direction);
 
 };
 
