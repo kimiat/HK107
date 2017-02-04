@@ -17,6 +17,7 @@ protected:
 public:
 	Enemy();
 	Enemy(int x, int y);
+	pair<int, int> getPosition();
 	void moveDown();
 	void moveRight();
 	void moveLeft();
