@@ -1,11 +1,21 @@
-#ifndef UI_H
-#define UI_H
+#ifndef SETUP_H
+#define SETUP_H
 
+#include<QGraphicsScene>
+#include<QGraphicsView>
+#include<player.h>
+#include<QKeyEvent>
+#include<QWidget>
 
-class UI
+class setup
 {
+private:
+    QGraphicsScene* scene;
+    Player* player;
+    QGraphicsView* view;
 public:
-    UI();
+    setup();
+    void game();
 };
 
-#endif // UI_H
+#endif
