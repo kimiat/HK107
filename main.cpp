@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     Setup *setup = new Setup();
     setup->game();
     QGraphicsScene *scene = setup->getScene();
-    Enemy *enemy = new Enemy(0, 0, 80, 80, RIGHT);
+    Ship *enemy = new Ship(400, 400, 80, 80, LEFT);
     scene->addItem(enemy);
     return a.exec();
 }

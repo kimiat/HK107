@@ -27,36 +27,36 @@ public:
     Enemy(int x, int y, unsigned int width, unsigned int height, Movement select);
 	pair<int, int> getPosition();
     pair<unsigned int, unsigned int> getSize();
-	void moveDown();
-	void moveRight();
-	void moveLeft();
+    bool moveDown();
+    bool moveRight();
+    bool moveLeft();
 	~Enemy();
 public slots:
     void move();
 };
 
-//class Ship: public Enemy
-//{
-//public:
-////    Ship(int x, int y, unsigned int width, unsigned int height, int select);
-//};
+class Ship: public Enemy
+{
+public:
+    Ship(int x, int y, unsigned int width, unsigned int height, Movement select);
+};
 
-//class Jet: public Enemy
-//{
-//public:
-////    Jet(int x, int y, unsigned int width, unsigned int height, int select);
-//};
+class Jet: public Enemy
+{
+public:
+    Jet(int x, int y, unsigned int width, unsigned int height, Movement select);
+};
 
-//class Helicopter: public Enemy
-//{
-//public:
-////    Helicopter(int x, int y, unsigned int width, unsigned int height, int select);
-//};
+class Helicopter: public Enemy
+{
+public:
+    Helicopter(int x, int y, unsigned int width, unsigned int height, Movement select);
+};
 
-//class Balloon: public Enemy
-//{
-//public:
-////    Balloon(int x, int y, unsigned int width, unsigned int height, int select);
-//};
+class Balloon: public Enemy
+{
+public:
+    Balloon(int x, int y, unsigned int width, unsigned int height, Movement select);
+};
 
 #endif
