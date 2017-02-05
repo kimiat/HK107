@@ -7,7 +7,7 @@
 #define p_width 50
 int height = 600;
 int width = 800;
-setup::setup()
+Setup::Setup()
 {
     scene = new QGraphicsScene();
     player = new Player(width / 2 - p_width/2, height - p_height, p_width, p_height );
@@ -22,7 +22,12 @@ setup::setup()
     scene->addItem(player);
 }
 
-void setup::game()
+QGraphicsScene *Setup::getScene()
+{
+    return this->scene;
+}
+
+void Setup::game()
 {
     view->show();
 }

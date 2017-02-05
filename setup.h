@@ -1,20 +1,21 @@
 #ifndef SETUP_H
 #define SETUP_H
 
-#include<QGraphicsScene>
-#include<QGraphicsView>
-#include<player.h>
-#include<QKeyEvent>
-#include<QWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <player.h>
+#include <QKeyEvent>
+#include <QWidget>
 
-class setup
+class Setup
 {
 private:
     QGraphicsScene* scene;
     Player* player;
     QGraphicsView* view;
 public:
-    setup();
+    Setup();
+    QGraphicsScene *getScene();
     void game();
 };
 
