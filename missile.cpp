@@ -1,10 +1,20 @@
 #include "missile.h"
+#include "enemy.h"
+#include "player.h"
 #include <QTimer>
-#include<iostream>
-#include<QGraphicsScene>
+#include <iostream>
+#include <QGraphicsScene>
+#include <QList>
+#include <QGraphicsItem>
+#include <typeinfo>
+#include <QDebug>
+
 #define speed 5
+
 using namespace std;
+
 int num = 0;
+
 missile::missile(int x, int y, int width, int height)
 {
     setRect(0, 0, width, height);
@@ -15,7 +25,7 @@ missile::missile(int x, int y, int width, int height)
     num++;
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move_up()));
-    timer->start(10);
+    timer->start(8);
 }
 
 int missile::get_x()
@@ -40,6 +50,20 @@ int get_num()
 
 void missile::move_up()
 {
+    QList<QGraphicsItem*> destroyedEnemies = collidingItems();
+    int n = destroyedEnemies.size();
+    for(int i = 0; i < n; i++)
+    {
+        if(typeid(*(destroyedEnemies[i])) != typeid(Player))
+        {
+            qDebug() << "this is a destroyed item!";
+            scene()->removeItem(destroyedEnemies[i]);
+            scene()->removeItem(this);
+            delete destroyedEnemies[i];
+            delete this;
+            return;
+        }
+    }
     y -= speed;
     setPos(get_x(), get_y() - 10);
     if(get_y() < 0 - get_height())
@@ -47,7 +71,6 @@ void missile::move_up()
         scene()->removeItem(this);
         delete this;
     }
-
 }
 
 missile::~missile()
