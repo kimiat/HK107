@@ -3,6 +3,8 @@
 #include <QDebug>
 #include "enemy.h"
 
+#define DOWNPANEL_H 80
+
 using namespace std;
 
 Enemy::Enemy() {}
@@ -36,9 +38,9 @@ pair<unsigned int, unsigned int> Enemy::getSize()
 
 bool Enemy::moveDown()
 {
-    this->position.second += 3;
+    this->position.second += 4;
     bool flag = true;
-    if(position.second > HEIGHT)
+    if(position.second > HEIGHT - DOWNPANEL_H)
     {
         scene()->removeItem(this);
         delete this;
@@ -96,16 +98,9 @@ void Enemy::move()
         break;
     }
     if(flag)
-    {
         setPos(position.first, position.second);
-//        qDebug() << movingPos << "  " << "  " << position.first << "  " << position.second;
-    }
     if(position.second >= movingPos && select != newSelect)
-    {
-//        qDebug() << "Enemy should move now...";
-//        qDebug() << select << " and " << newSelect;
         select = newSelect;
-    }
 }
 
 Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
@@ -122,7 +117,7 @@ Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos,
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(30);
 }
 
 Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
@@ -139,7 +134,7 @@ Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, M
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(30);
 }
 
 Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
@@ -156,7 +151,7 @@ Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, in
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(30);
 }
 
 Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
@@ -173,5 +168,5 @@ Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movi
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(30);
 }

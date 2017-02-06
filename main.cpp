@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 //    Jet *enemy2 = new Jet(300, 300, 60, 60, DOWN);
 //    scene->addItem(enemy1);
 //    scene->addItem(enemy2);
-//    qDebug() << DOWN << "  " << LEFT << "  " << RIGHT;
     setup->makeEnemies();
     return a.exec();
 }

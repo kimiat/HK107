@@ -23,7 +23,6 @@ protected:
     QTimer *timer;
     Movement select;
     Movement newSelect;
-//    bool moving;
     int movingPos;
 public:
     Enemy();
