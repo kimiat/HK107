@@ -12,6 +12,7 @@
 
 #define p_height 50
 #define p_width 50
+#define down_pannel_h 80
 int height = 600;
 int width = 800;
 
@@ -24,8 +25,8 @@ using namespace std;
 Setup::Setup()
 {
     scene = new QGraphicsScene();
-    player = new Player(width / 2 - p_width/2, height - p_height, p_width, p_height );
-    player->setPos(width / 2 - p_width/2, height - p_height);
+    player = new Player(width / 2 - p_width/2, height - p_height - down_pannel_h, p_width, p_height );
+    player->setPos(width / 2 - p_width/2 , height - p_height - down_pannel_h);
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
     view = new QGraphicsView(scene);
@@ -34,6 +35,8 @@ Setup::Setup()
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scene->addItem(player);
+    Panel = new panel();
+    scene->addItem(Panel);
 }
 
 QGraphicsScene *Setup::getScene()
