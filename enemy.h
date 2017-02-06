@@ -9,7 +9,7 @@
 using namespace std;
 
 const int HEIGHT = 600;
-const int WIDTH = 600;
+const int WIDTH = 800;
 
 enum Movement {DOWN = 1, LEFT = 2, RIGHT = 3};
 
@@ -22,9 +22,12 @@ protected:
 	int speed; //how much should it move per millisecond
     QTimer *timer;
     Movement select;
+    Movement newSelect;
+//    bool moving;
+    int movingPos;
 public:
     Enemy();
-    Enemy(int x, int y, unsigned int width, unsigned int height, Movement select);
+    Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
 	pair<int, int> getPosition();
     pair<unsigned int, unsigned int> getSize();
     bool moveDown();
@@ -38,25 +41,25 @@ public slots:
 class Ship: public Enemy
 {
 public:
-    Ship(int x, int y, unsigned int width, unsigned int height, Movement select);
+    Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
 };
 
 class Jet: public Enemy
 {
 public:
-    Jet(int x, int y, unsigned int width, unsigned int height, Movement select);
+    Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
 };
 
 class Helicopter: public Enemy
 {
 public:
-    Helicopter(int x, int y, unsigned int width, unsigned int height, Movement select);
+    Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
 };
 
 class Balloon: public Enemy
 {
 public:
-    Balloon(int x, int y, unsigned int width, unsigned int height, Movement select);
+    Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
 };
 
 #endif

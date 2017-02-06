@@ -3,12 +3,15 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <player.h>
+#include "player.h"
+#include "enemy.h"
 #include <QKeyEvent>
 #include <QWidget>
+#include <QObject>
 
-class Setup
+class Setup: public QObject
 {
+    Q_OBJECT
 private:
     QGraphicsScene* scene;
     Player* player;
@@ -16,7 +19,10 @@ private:
 public:
     Setup();
     QGraphicsScene *getScene();
-    void game();
+    void start();
+    void makeEnemies();
+public slots:
+    void newEnemies();
 };
 
 #endif

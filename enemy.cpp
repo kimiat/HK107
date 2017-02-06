@@ -7,14 +7,17 @@ using namespace std;
 
 Enemy::Enemy() {}
 
-Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, Movement select)
+Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
     this->select = select;
+    this->newSelect = newSelect;
+    this->movingPos = movingPos;
     setRect(0, 0, width, height);
+    setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
@@ -93,59 +96,80 @@ void Enemy::move()
         break;
     }
     if(flag)
+    {
         setPos(position.first, position.second);
+//        qDebug() << movingPos << "  " << "  " << position.first << "  " << position.second;
+    }
+    if(position.second >= movingPos && select != newSelect)
+    {
+//        qDebug() << "Enemy should move now...";
+//        qDebug() << select << " and " << newSelect;
+        select = newSelect;
+    }
 }
 
-Ship::Ship(int x, int y, unsigned int width, unsigned int height, Movement select)
+Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
     this->select = select;
+    this->newSelect = newSelect;
+    this->movingPos = movingPos;
     setRect(0, 0, width, height);
+    setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
 }
 
-Jet::Jet(int x, int y, unsigned int width, unsigned int height, Movement select)
+Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
     this->select = select;
+    this->newSelect = newSelect;
+    this->movingPos = movingPos;
     setRect(0, 0, width, height);
+    setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
 }
 
-Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, Movement select)
+Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
     this->select = select;
+    this->newSelect = newSelect;
+    this->movingPos = movingPos;
     setRect(0, 0, width, height);
+    setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
 }
 
-Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, Movement select)
+Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
     this->select = select;
+    this->newSelect = newSelect;
+    this->movingPos = movingPos;
     setRect(0, 0, width, height);
+    setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
