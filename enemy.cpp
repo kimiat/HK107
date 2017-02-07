@@ -2,6 +2,11 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include "enemy.h"
+#include "player.h"
+#include <QList>
+#include <QGraphicsItem>
+#include <typeinfo>
+#include <QDebug>
 
 #define DOWNPANEL_H 80
 
@@ -80,10 +85,31 @@ bool Enemy::moveLeft()
     return flag;
 }
 
+void Enemy::checkLosing()
+{
+    QList<QGraphicsItem*> check = collidingItems();
+    int n = check.size();
+    for(int i = 0; i < n; i++)
+    {
+        if(typeid(*(check[i])) == typeid(Player))
+        {
+            qDebug() << "This is a player item!";
+            qDebug() << "You LOSE!";
+            exit(0);
+            scene()->removeItem(check[i]);
+            scene()->removeItem(this);
+            delete check[i];
+            delete this;
+            return;
+        }
+    }
+}
+
 Enemy::~Enemy() {}
 
 void Enemy::move()
 {
+    this->checkLosing();
     bool flag;
     switch(this->select)
     {
