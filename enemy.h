@@ -32,6 +32,7 @@ public:
     bool moveDown();
     bool moveRight();
     bool moveLeft();
+    void checkLosing();
 	~Enemy();
 public slots:
     void move();
