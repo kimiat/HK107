@@ -1,4 +1,3 @@
-//
 #include <iostream>
 #include <QGraphicsScene>
 #include <QDebug>
@@ -97,12 +96,13 @@ void Enemy::checkLosing()
         {
             qDebug() << "This is a player item!";
             qDebug() << "You LOSE!";
+
             exit(0);
             scene()->removeItem(check[i]);
             scene()->removeItem(this);
             delete check[i];
             delete this;
-//            exit(0);
+            exit(0);
             return;
         }
     }

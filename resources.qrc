@@ -1,1 +1,10 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/images">
+        <file>b_panel.jpg</file>
+        <file>F.jpg</file>
+        <file>needle.png</file>
+        <file>heli.png</file>
+        <file>helileft.png</file>
+        <file>heliright.png</file>
+    </qresource>
+</RCC>

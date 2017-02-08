@@ -1,4 +1,3 @@
-//
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -39,4 +38,4 @@ public slots:
     void shoot();
 };
 
-#endif // PLAYER
+#endif

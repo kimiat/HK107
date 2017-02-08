@@ -28,7 +28,7 @@ Setup::Setup()
 {
     scene = new QGraphicsScene();
     player = new Player(width / 2 - p_width/2, height - p_height - down_pannel_h - 10, p_width, p_height );
-    player->setPos(width / 2 - p_width/2 , height - p_height - down_pannel_h);
+    player->setPos(width / 2 - p_width/2 , height - p_height - down_pannel_h - 10);
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
     view = new QGraphicsView(scene);

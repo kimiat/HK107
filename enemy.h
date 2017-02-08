@@ -1,4 +1,3 @@
-//
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -23,7 +22,6 @@ protected:
 	pair<int, int> position; //x and y
 	pair<unsigned int, unsigned int> size; //width and height
 	int speed; //how much should it move per millisecond
-//    double downSpeed;
     QTimer *timer;
     Movement select;
     Movement newSelect;
