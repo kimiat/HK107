@@ -3,12 +3,13 @@
 #include<QGraphicsScene>
 #include "player.h"
 #include<QObject>
+#include<QList>
 #define speed 5
 #define m_height 10
 #define m_width 5
 //
-#define p_height 600
-#define p_width 800
+#define p_height 700
+#define p_width 1000
 #include <iostream>
 using namespace std;
 extern int width;
@@ -56,15 +57,6 @@ void Player::move_right()
     }
 }
 
-void Player::inc_fuel()
-{
-    fuel += 10;
-}
-
-void Player::dec_fuel()
-{
-    fuel -= 3;
-}
 int Player::get_x()
 {
     return x;

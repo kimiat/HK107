@@ -17,6 +17,8 @@ private:
     pair<int, int> position;
     pair<unsigned int, unsigned int> size;
     QTimer *timer;
+signals:
+    void getFuel();
 public:
     Tank(int x, int y, unsigned int width, unsigned int height, double downSpeed);
 public slots:

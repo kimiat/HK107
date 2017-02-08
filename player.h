@@ -37,8 +37,6 @@ public slots:
     void move_left();
     void move_right();
     void shoot();
-    void inc_fuel();
-    void dec_fuel();
 };
 
 #endif // PLAYER

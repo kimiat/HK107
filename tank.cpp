@@ -4,6 +4,8 @@
 #include <iostream>
 #include <QGraphicsScene>
 #include <QDebug>
+#include <typeinfo>
+#include "player.h"
 
 #define DOWNPANEL_H 80
 
@@ -24,6 +26,11 @@ Tank::Tank(int x, int y, unsigned int width, unsigned int height, double downSpe
 
 void Tank::move()
 {
+    QList<QGraphicsItem*> items = collidingItems();
+    int size = items.size();
+    for(int i = 0; i < size; i++)
+         if(typeid(*(items[i])) == typeid(Player))
+             emit getFuel();
     this->position.second += downSpeed;
     downSpeed += 0.01;
     bool flag = true;
