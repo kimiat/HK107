@@ -5,6 +5,7 @@
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include <QObject>
+#include "enemy.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ private:
     pair<unsigned int, unsigned int> size;
     QTimer *timer;
 public:
-    Tank(int x, int y, unsigned int width, unsigned int height);
+    Tank(int x, int y, unsigned int width, unsigned int height, double downSpeed);
 public slots:
     void move();
 };

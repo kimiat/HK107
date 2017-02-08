@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Tank::Tank(int x, int y, unsigned int width, unsigned int height)
+Tank::Tank(int x, int y, unsigned int width, unsigned int height, double downSpeed)
 {
     this->position.first = x;
     this->position.second = y;
@@ -23,7 +23,8 @@ Tank::Tank(int x, int y, unsigned int width, unsigned int height)
 
 void Tank::move()
 {
-    this->position.second += 7;
+    this->position.second += downSpeed;
+    downSpeed += 0.01;
     bool flag = true;
     if(position.second > HEIGHT - DOWNPANEL_H)
     {
