@@ -23,8 +23,10 @@ Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPo
     this->select = select;
     this->newSelect = newSelect;
     this->movingPos = movingPos;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
     setPos(x, y);
+    setPixmap(QPixmap(":/images/heli.png"));
+    setScale(0.8);
     this->timer = new QTimer();
     this->speed = 15;
 //    this->downSpeed = downSpeed;
@@ -142,8 +144,13 @@ Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos,
     this->select = select;
     this->newSelect = newSelect;
     this->movingPos = movingPos;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
     setPos(x, y);
+    if(newSelect == LEFT)
+        setPixmap(QPixmap(":/images/shipleft.png"));
+    else
+        setPixmap(QPixmap(":/images/shipright.png"));
+    setScale(0.11);
     this->timer = new QTimer();
     this->speed = 15;
 //    this->downSpeed = downSpeed;
@@ -161,8 +168,14 @@ Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, d
     this->select = select;
     this->newSelect = newSelect;
     this->movingPos = movingPos;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
     setPos(x, y);
+    if(newSelect == LEFT)
+        setPixmap(QPixmap(":/images/jetleft.png"));
+    else
+        setPixmap(QPixmap(":/images/jetright.png"));
+    setScale(0.17);
+
     this->timer = new QTimer();
     this->speed = 15;
 //    this->downSpeed = downSpeed;
@@ -180,8 +193,14 @@ Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, in
     this->select = select;
     this->newSelect = newSelect;
     this->movingPos = movingPos;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
     setPos(x, y);
+    if(newSelect == LEFT)
+        setPixmap(QPixmap(":/images/helicopterright.png"));
+    else
+        setPixmap(QPixmap(":/images/helicopterleft.png"));
+    setScale(0.85);
+
     this->timer = new QTimer();
 //    this->downSpeed = downSpeed;
     this->speed = 15;
@@ -199,7 +218,9 @@ Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movi
     this->select = select;
     this->newSelect = newSelect;
     this->movingPos = movingPos;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
+    setPixmap(QPixmap(":/images/balloon.png"));
+    setScale(0.06);
     setPos(x, y);
     this->timer = new QTimer();
 //    this->downSpeed = downSpeed;

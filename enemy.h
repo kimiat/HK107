@@ -15,7 +15,7 @@ static double downSpeed = 3;
 
 enum Movement {DOWN = 1, LEFT = 2, RIGHT = 3};
 
-class Enemy: public QObject, public QGraphicsRectItem
+class Enemy: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 protected:
@@ -58,7 +58,7 @@ public:
     Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
-class Balloon: public Enemy
+class Balloon: public Enemy//, public QGraphicsPixmapItem
 {
 public:
     Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
