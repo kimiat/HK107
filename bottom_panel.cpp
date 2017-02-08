@@ -2,6 +2,7 @@
 #define s_height 700
 #define s_width 1000
 #define p_height 150
+
 panel::panel()
 {
     gauge = new QGraphicsPixmapItem();

@@ -3,6 +3,7 @@
 #include "fuel.h"
 #include<QGraphicsPixmapItem>
 #include<QObject>
+
 class panel:public QObject,  public QGraphicsPixmapItem{
     Q_OBJECT
 private:
