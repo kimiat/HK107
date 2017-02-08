@@ -14,7 +14,7 @@ using namespace std;
 
 Enemy::Enemy() {}
 
-Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
+Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
@@ -27,6 +27,7 @@ Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPo
     setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
+//    this->downSpeed = downSpeed;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
 }
@@ -43,7 +44,7 @@ pair<unsigned int, unsigned int> Enemy::getSize()
 
 bool Enemy::moveDown()
 {
-    this->position.second += 4;
+    this->position.second += downSpeed;
     bool flag = true;
     if(position.second > HEIGHT - DOWNPANEL_H)
     {
@@ -100,6 +101,7 @@ void Enemy::checkLosing()
             scene()->removeItem(this);
             delete check[i];
             delete this;
+//            exit(0);
             return;
         }
     }
@@ -110,6 +112,7 @@ Enemy::~Enemy() {}
 void Enemy::move()
 {
     this->checkLosing();
+    downSpeed += 0.01;
     bool flag;
     switch(this->select)
     {
@@ -129,7 +132,7 @@ void Enemy::move()
         select = newSelect;
 }
 
-Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
+Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
@@ -142,11 +145,13 @@ Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos,
     setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
+//    this->downSpeed = downSpeed;
+//    this->downSpeed = 4;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(30);
 }
 
-Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
+Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
@@ -159,11 +164,13 @@ Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, M
     setPos(x, y);
     this->timer = new QTimer();
     this->speed = 15;
+//    this->downSpeed = downSpeed;
+//    this->downSpeed = 4;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(30);
 }
 
-Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
+Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
@@ -175,12 +182,14 @@ Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, in
     setRect(0, 0, width, height);
     setPos(x, y);
     this->timer = new QTimer();
+//    this->downSpeed = downSpeed;
     this->speed = 15;
+//    this->downSpeed = 4;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(30);
 }
 
-Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect)
+Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
     this->position.first = x;
     this->position.second = y;
@@ -192,7 +201,9 @@ Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movi
     setRect(0, 0, width, height);
     setPos(x, y);
     this->timer = new QTimer();
+//    this->downSpeed = downSpeed;
     this->speed = 15;
+//    this->downSpeed = 4;
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(30);
 }

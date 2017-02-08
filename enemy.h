@@ -11,6 +11,8 @@ using namespace std;
 const int HEIGHT = 600;
 const int WIDTH = 800;
 
+static double downSpeed = 3;
+
 enum Movement {DOWN = 1, LEFT = 2, RIGHT = 3};
 
 class Enemy: public QObject, public QGraphicsRectItem
@@ -20,13 +22,14 @@ protected:
 	pair<int, int> position; //x and y
 	pair<unsigned int, unsigned int> size; //width and height
 	int speed; //how much should it move per millisecond
+//    double downSpeed;
     QTimer *timer;
     Movement select;
     Movement newSelect;
     int movingPos;
 public:
     Enemy();
-    Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
+    Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 	pair<int, int> getPosition();
     pair<unsigned int, unsigned int> getSize();
     bool moveDown();
@@ -41,25 +44,25 @@ public slots:
 class Ship: public Enemy
 {
 public:
-    Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
+    Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 class Jet: public Enemy
 {
 public:
-    Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
+    Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 class Helicopter: public Enemy
 {
 public:
-    Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
+    Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 class Balloon: public Enemy
 {
 public:
-    Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, Movement select, Movement newSelect);
+    Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 #endif
