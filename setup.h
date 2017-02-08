@@ -17,7 +17,7 @@ private:
     QGraphicsScene* scene;
     Player* player;
     QGraphicsView* view;
-    panel* Panel;
+//    panel* Panel;
 public:
     Setup();
     QGraphicsScene *getScene();

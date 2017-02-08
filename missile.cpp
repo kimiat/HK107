@@ -59,10 +59,10 @@ void missile::move_up()
         if(typeid(*(destroyedEnemies[i])) == typeid(Ship))
         {
             qDebug() << "The ship has been destroyed!";
+            this->player->addScore(SHIP);
             qDebug() << this->player->getScore();
             scene()->removeItem(destroyedEnemies[i]);
             scene()->removeItem(this);
-            this->player->addScore(SHIP);
             delete destroyedEnemies[i];
             delete this;
             return;
@@ -70,10 +70,10 @@ void missile::move_up()
         else if(typeid(*(destroyedEnemies[i])) == typeid(Helicopter))
         {
             qDebug() << "The helicopter has been destroyed!";
+            this->player->addScore(HELICOPTER);
             qDebug() << this->player->getScore();
             scene()->removeItem(destroyedEnemies[i]);
             scene()->removeItem(this);
-            this->player->addScore(HELICOPTER);
             delete destroyedEnemies[i];
             delete this;
             return;
@@ -81,10 +81,10 @@ void missile::move_up()
         else if(typeid(*(destroyedEnemies[i])) == typeid(Jet))
         {
             qDebug() << "The jet has been destroyed!";
+            this->player->addScore(JET);
             qDebug() << this->player->getScore();
             scene()->removeItem(destroyedEnemies[i]);
             scene()->removeItem(this);
-            this->player->addScore(JET);
             delete destroyedEnemies[i];
             delete this;
             return;
@@ -92,10 +92,10 @@ void missile::move_up()
         else if(typeid(*(destroyedEnemies[i])) == typeid(Balloon))
         {
             qDebug() << "The balloon has been destroyed!";
+            this->player->addScore(BALLOON);
             qDebug() << this->player->getScore();
             scene()->removeItem(destroyedEnemies[i]);
             scene()->removeItem(this);
-            this->player->addScore(BALLOON);
             delete destroyedEnemies[i];
             delete this;
             return;
@@ -103,10 +103,10 @@ void missile::move_up()
         else if(typeid(*(destroyedEnemies[i])) == typeid(Tank))
         {
             qDebug() << "The tank has been destroyed!";
+            this->player->addScore(TANK);
             qDebug() << this->player->getScore();
             scene()->removeItem(destroyedEnemies[i]);
             scene()->removeItem(this);
-            this->player->addScore(TANK);
             delete destroyedEnemies[i];
             delete this;
             return;
@@ -126,4 +126,3 @@ missile::~missile()
     delete timer;
     num--;
 }
-
