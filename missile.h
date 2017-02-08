@@ -1,9 +1,9 @@
+//
 #ifndef MISSILE_H
 #define MISSILE_H
 #include <QTimer>
 #include <QGraphicsRectItem>
 #include <QObject>
-//#include "player.h"
 
 class Player;
 

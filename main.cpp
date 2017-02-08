@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+//
 #include "setup.h"
 #include "enemy.h"
 #include <QApplication>

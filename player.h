@@ -1,8 +1,8 @@
-#ifndef PLAYER
-#define PLAYER
+//
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <QGraphicsRectItem>
-//#include "missile.h"
 #include "score.h"
 #include <QTimer>
 #include <QObject>

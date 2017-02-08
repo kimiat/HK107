@@ -6,9 +6,10 @@
 #define speed 5
 #define m_height 10
 #define m_width 5
+//
 #define p_height 600
 #define p_width 800
-#include<iostream>
+#include <iostream>
 using namespace std;
 extern int width;
 extern int num;

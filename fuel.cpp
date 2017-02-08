@@ -1,3 +1,4 @@
+//
 #include "fuel.h"
 
 fuel::fuel(int X, int Y, int Width, int Height)

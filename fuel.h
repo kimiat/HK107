@@ -1,5 +1,6 @@
-#ifndef FUEL
-#define FUEL
+//
+#ifndef FUEL_H
+#define FUEL_H
 
 class fuel
 {
