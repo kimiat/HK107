@@ -23,6 +23,7 @@ Player::Player(int x, int y, int width, int height)
     this->width = width;
     setRect(0,0, width, height);
     fuel = 500;
+    score = new Score();
     left_timer = new QTimer();
     right_timer = new QTimer();
     shoot_timer = new QTimer();
@@ -75,7 +76,7 @@ int Player::get_y()
 
 void Player::shoot()
 {
-    missile* m = new missile(x + width/2 - m_width/2, y - m_height, m_width, m_height);
+    missile* m = new missile(x + width/2 - m_width/2, y - m_height, m_width, m_height, this);
     m->setPos(m->get_x(), m->get_y());
     scene()->addItem(m);
     return;
@@ -120,4 +121,14 @@ void Player::keyReleaseEvent(QKeyEvent *direction)
         is_right = 0;
         shoot_timer->stop();
     }
+}
+
+void Player::addScore(Object destroyed)
+{
+    score->addScore(destroyed);
+}
+
+int Player::getScore()
+{
+    return score->getScore();
 }

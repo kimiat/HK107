@@ -3,6 +3,9 @@
 #include <QTimer>
 #include <QGraphicsRectItem>
 #include <QObject>
+//#include "player.h"
+
+class Player;
 
 class missile:public QObject,  public QGraphicsRectItem
 {
@@ -13,8 +16,9 @@ private:
     int height;
     int width;
     QTimer* timer;
+    Player *player;
 public:
-    missile(int x, int y, int width, int height);
+    missile(int x, int y, int width, int height, Player *player);
     int get_x();
     int get_y();
     ~missile();

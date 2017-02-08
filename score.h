@@ -2,7 +2,7 @@
 
 using namespace std;
 
-enum Object {SHIP = 30, HELICOPTER = 60, BALLOON = 60, JET = 100};
+enum Object {SHIP = 30, HELICOPTER = 60, BALLOON = 60, JET = 100, TANK = 150};
 
 class Score
 {
