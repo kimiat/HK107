@@ -23,7 +23,8 @@ Player::Player(int x, int y, int width, int height)
     this->y = y;
     this->height = height;
     this->width = width;
-    setRect(0,0, width, height);
+    setPixmap(QPixmap(":/images/heli.png"));
+    setScale(0.8);
     fuel = 500;
     score = new Score();
     left_timer = new QTimer();
@@ -79,11 +80,13 @@ void Player::keyPressEvent(QKeyEvent *direction)
 {
     if(direction->key() == Qt::Key_Left && is_left != 1 && !direction->isAutoRepeat())
     {
+        setPixmap(QPixmap(":/images/helileft.png"));
         is_left = 1;
         left_timer->start(20);
     }
     if(direction->key() == Qt::Key_Right && is_right != 1 && !direction->isAutoRepeat())
     {
+        setPixmap(QPixmap(":/images/heliright.png"));
         is_right = 1;
         right_timer->start(20);
     }
@@ -101,11 +104,15 @@ void Player::keyReleaseEvent(QKeyEvent *direction)
 {
     if(direction->key() == Qt::Key_Left && !direction->isAutoRepeat())
     {
+        if(!is_right)
+            setPixmap(QPixmap(":/images/heli.png"));
         is_left = 0;
         left_timer->stop();
     }
     if(direction->key() == Qt::Key_Right && !direction->isAutoRepeat())
     {
+        if(!is_left)
+            setPixmap(QPixmap(":/images/heli.png"));
         is_right = 0;
         right_timer->stop();
     }

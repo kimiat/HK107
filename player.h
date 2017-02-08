@@ -2,14 +2,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include "score.h"
 #include <QTimer>
 #include <QObject>
 
 class missile;
 
-class Player :public QObject, public QGraphicsRectItem{
+class Player :public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 private:
     int x;
