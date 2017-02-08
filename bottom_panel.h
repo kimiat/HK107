@@ -15,8 +15,10 @@ public:
     panel();
     QGraphicsPixmapItem* getGauge();
     QGraphicsPixmapItem* getNeedle();
+    fuel* getFuel();
 public slots:
-    void set_pos();
+    void set_posl();
+    void set_posr();
 };
 
 #endif // BOTTOM_PANEL

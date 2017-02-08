@@ -20,7 +20,8 @@ panel::panel()
     setScale(6);
     setZValue(8);
     amount = new fuel();
-    connect(amount, SIGNAL(fuelChanged(int)), this, SLOT(set_pos()));
+    connect(amount, SIGNAL(fuelDec(int)), this, SLOT(set_posl()));
+    connect(amount, SIGNAL(fuelInc(int)), this, SLOT(set_posr()));
 }
 
 QGraphicsPixmapItem *panel::getGauge()
@@ -33,7 +34,20 @@ QGraphicsPixmapItem *panel::getNeedle()
     return needle;
 }
 
-void panel::set_pos()
+fuel *panel::getFuel()
+{
+    return amount;
+}
+
+void panel::set_posl()
 {
     needle->setPos(needle->x() - 1.32, needle->y());
 }
+
+void panel::set_posr()
+{
+    if(needle->x() + 5 < s_width / 2 + 75 )
+        needle->setPos(needle->x() + 5, needle->y());
+}
+
+
