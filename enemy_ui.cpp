@@ -54,13 +54,13 @@ void e_ui::checkLosing()
         {
             cout << "This is a player item!";
             cout << "You LOSE!";
-//            emit gameover();
-            exit(0);
-            scene()->removeItem(check[i]);
-            scene()->removeItem(this);
-            delete check[i];
-            delete this;
-            return;
+            emit gameover();
+//            exit(0);
+//            scene()->removeItem(check[i]);
+//            scene()->removeItem(this);
+//            delete check[i];
+//            delete this;
+//            return;
         }
     }
 }

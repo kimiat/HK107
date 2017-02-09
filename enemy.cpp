@@ -39,10 +39,10 @@ void Enemy::moveDown()
     {
         emit destroyed();
         qDebug() << "Enemy removed and deleted!";
+        delete this;
         return;
     }
 	emit moved();
-
 }
 
 Enemy::~Enemy() {}
