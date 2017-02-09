@@ -25,6 +25,7 @@ public:
     void makeEnemies();
 public slots:
     void newEnemies();
+    void endGame();
 };
 
 #endif

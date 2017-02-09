@@ -1,6 +1,7 @@
 #include "setup.h"
 #include "player.h"
 #include "enemy.h"
+#include "enemy_ui.h"
 #include "tank.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -90,17 +91,29 @@ void Setup::newEnemies()
         moveType = RIGHT;
     else
         moveType = DOWN;
-    Enemy *enemy = NULL;
+    e_ui *enemyui = NULL;
+//    connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     if(randType == 0)
-        enemy = new Ship(randPos, 0, 40, 80, randStart, downSpeed, DOWN, moveType);
+        enemyui = new s_ui(make_pair(randPos, 0), SHIP_E);
+//        enemy = new Ship(make_pair(randPos, 0), randStart, downSpeed, DOWN, moveType);
     else if(randType == 1)
-        enemy = new Helicopter(randPos, 0, 45, 45, randStart, downSpeed, DOWN, moveType);
+        enemyui = new h_ui(make_pair(randPos, 0), HELICOPTER_E);
+//        enemy = new Helicopter(make_pair(randPos, 0), randStart, downSpeed, DOWN, moveType);
     else if(randType == 2 && moveType == LEFT)
-        enemy = new Jet(600, randStart, 70, 30, randStart, downSpeed, moveType, moveType);
+        enemyui = new j_ui(make_pair(randPos, 0), JET_E);
+//        enemy = new Jet(make_pair(600, randPos), randStart, downSpeed, moveType, moveType);
     else if(randType == 2 && moveType == RIGHT)
-        enemy = new Jet(600, randStart, 70, 30, randStart, downSpeed, moveType, moveType);
+        enemyui = new j_ui(make_pair(randPos, 0), JET_E);
+//        enemy = new Jet(make_pair(600, randPos), randStart, downSpeed, moveType, moveType);
     else if(randType == 3)
-        enemy = new Balloon(randPos, 0, 65, 65, randStart, downSpeed, DOWN, DOWN);
-    if(enemy != NULL)
-        this->scene->addItem(enemy);
+        enemyui = new b_ui(make_pair(randPos, 0), BALLOON_E);
+//        enemy = new Balloon(make_pair(randPos, 0), randStart, downSpeed, DOWN, DOWN);
+    if(enemyui != NULL)
+        this->scene->addItem(enemyui);
+}
+
+void Setup::endGame()
+{
+    cout << "end game!";
+    exit(0);
 }
