@@ -19,25 +19,20 @@ p_ui::p_ui()
     connect(p, SIGNAL(straight()), this, SLOT(setPicStraight()));
     connect(p, SIGNAL(positionChanged(int)), this, SLOT(changePos()));
     connect(p, SIGNAL(shoot_m()), this, SLOT(create_m()));
-//    connect(p->get_m(), SIGNAL(m_moved()), this, SLOT(moveMissile()));
-//    connect(p->get_m(), SIGNAL(m_removed()), this, SLOT(removeMissile()));
 }
 
 void p_ui::keyPressEvent(QKeyEvent *direction)
 {
-//    cout << "key is pressed";
     p->keyPress(direction);
 }
 
 void p_ui::keyReleaseEvent(QKeyEvent *direction)
 {
-//    cout <<"key is released";
     p->keyRelease(direction);
 }
 
 void p_ui::changePos()
 {
-//    cout << "in the changepos" << endl;
     cout << "in the changepos " << endl;
     setPos(p->get_x(), p->get_y());
 }
@@ -52,26 +47,11 @@ void p_ui::setPicRight()
     setPixmap(QPixmap(":/images/heliright.png"));
 }
 
-//void p_ui::showMissile()
-//{
-//    p->get_m()->setRect(0, 0, 10, 20);
-//    p->get_m()->setPos(p->get_m()->get_x(), p->get_m()->get_y());
-//    scene()->addItem(p->get_m());
-//}
-
 void p_ui::create_m()
 {
-    cout << " missile is createrd" << endl;
     m_ui* Missile = new m_ui(p->get_x() + 20, p->get_y() - 15, p);
     scene()->addItem(Missile);
-    cout << " after creating " << endl;
-//    p->get_m()->setPos(p->get_m()->get_x(), p->get_m()->get_y());
 }
-
-//void p_ui::removeMissile()
-//{
-//    scene()->removeItem(p->get_m());
-//}
 
 void p_ui::setPicStraight()
 {
