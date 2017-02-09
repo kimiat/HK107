@@ -14,5 +14,6 @@
         <file>jetleft.png</file>
         <file>jetright.png</file>
         <file>gas.png</file>
+        <file>missile.png</file>
     </qresource>
 </RCC>
