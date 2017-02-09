@@ -54,3 +54,8 @@ missile::~missile()
     delete timer;
     num--;
 }
+
+Player *missile::getPlayer()
+{
+    return player;
+}

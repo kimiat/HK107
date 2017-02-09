@@ -9,7 +9,7 @@ class m_ui: public QObject,public QGraphicsPixmapItem{
 private:
     missile* m;
 public:
-    m_ui(int x, int y,Player* player );
+    m_ui(int x, int y, Player* player);
     ~m_ui();
 public slots:
     void set_pos();

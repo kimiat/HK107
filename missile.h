@@ -23,6 +23,7 @@ public:
     int get_y();
     ~missile();
     int get_height();
+    Player *getPlayer();
 signals:
     void m_removed();
     void m_moved();
