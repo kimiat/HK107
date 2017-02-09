@@ -5,7 +5,7 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include <typeinfo>
-#include "player.h"
+#include "player_ui.h"
 
 #define DOWNPANEL_H 80
 
@@ -29,7 +29,7 @@ void Tank::move()
     QList<QGraphicsItem*> items = collidingItems();
     int size = items.size();
     for(int i = 0; i < size; i++)
-         if(typeid(*(items[i])) == typeid(Player))
+         if(typeid(*(items[i])) == typeid(p_ui))
              emit getFuel();
     this->position.second += downSpeed;
     downSpeed += 0.01;

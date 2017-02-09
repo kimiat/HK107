@@ -16,7 +16,6 @@ void fuel::inc_fuel()
 {
     if(fuel_amount < 480)
     {
-        cout << " fue increased;"<<endl;
         fuel_amount += 20;
         emit fuelInc(fuel_amount);
     }
