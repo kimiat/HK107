@@ -1,4 +1,4 @@
-//
+#include <QObject>
 #include "tank.h"
 #include "enemy.h"
 #include <iostream>
@@ -17,7 +17,9 @@ Tank::Tank(int x, int y, unsigned int width, unsigned int height, double downSpe
     this->position.second = y;
     this->size.first = width;
     this->size.second = height;
-    setRect(0, 0, width, height);
+//    setRect(0, 0, width, height);
+    setPixmap(QPixmap(":/images/gas.png"));
+    setScale(0.15);
     setPos(x, y);
     this->timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));

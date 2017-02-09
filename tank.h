@@ -1,4 +1,3 @@
-//
 #ifndef TANK_H
 #define TANK_H
 
@@ -10,7 +9,7 @@
 
 using namespace std;
 
-class Tank: public QObject, public QGraphicsRectItem
+class Tank: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
