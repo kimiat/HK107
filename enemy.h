@@ -15,53 +15,53 @@ static double downSpeed = 3;
 
 enum Movement {DOWN = 1, LEFT = 2, RIGHT = 3};
 
-class Enemy: public QObject, public QGraphicsPixmapItem
+class Enemy: public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 protected:
 	pair<int, int> position; //x and y
-	pair<unsigned int, unsigned int> size; //width and height
-	int speed; //how much should it move per millisecond
-    QTimer *timer;
-    Movement select;
-    Movement newSelect;
-    int movingPos;
+	// int speed; //how much should it move per millisecond
+	QTimer *timer;
+	Movement select;
+	Movement newSelect;
+	int movingPos;
 public:
-    Enemy();
-    Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
+	Enemy();
+	Enemy(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect);
 	pair<int, int> getPosition();
-    pair<unsigned int, unsigned int> getSize();
-    bool moveDown();
-    bool moveRight();
-    bool moveLeft();
-    void checkLosing();
+    int getMovingPos();
+    Movement getSelect();
+    Movement getNewSelect();
 	~Enemy();
+signals:
+	void moved();
+	void destroyed();
 public slots:
-    void move();
+	void moveDown();
 };
 
 class Ship: public Enemy
 {
 public:
-    Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
-};
-
-class Jet: public Enemy
-{
-public:
-    Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
+    Ship(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 class Helicopter: public Enemy
 {
 public:
-    Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
+    Helicopter(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
-class Balloon: public Enemy//, public QGraphicsPixmapItem
+class Balloon: public Enemy
 {
 public:
-    Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect);
+    Balloon(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect);
+};
+
+class Jet: public Enemy
+{
+public:
+    Jet(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect);
 };
 
 #endif

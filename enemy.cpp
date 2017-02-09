@@ -6,7 +6,6 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <typeinfo>
-#include <QDebug>
 
 #define DOWNPANEL_H 80
 
@@ -14,218 +13,83 @@ using namespace std;
 
 Enemy::Enemy() {}
 
-Enemy::Enemy(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
+Enemy::Enemy(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
-    this->position.first = x;
-    this->position.second = y;
-    this->size.first = width;
-    this->size.second = height;
-    this->select = select;
-    this->newSelect = newSelect;
-    this->movingPos = movingPos;
-//    setRect(0, 0, width, height);
-    setPos(x, y);
-    setPixmap(QPixmap(":/images/heli.png"));
-    setScale(0.8);
-    this->timer = new QTimer();
-    this->speed = 15;
-//    this->downSpeed = downSpeed;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+	this->position = position;
+	this->select = select;
+	this->newSelect = newSelect;
+	this->movingPos = movingPos;
+	timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
+	timer->start(20);
 }
 
-pair<int, int> Enemy::getPosition()
-{
-    return position;
-}
+pair<int, int> Enemy::getPosition() { return position; }
 
-pair<unsigned int, unsigned int> Enemy::getSize()
-{
-    return size;
-}
+int Enemy::getMovingPos() { return this->movingPos; }
 
-bool Enemy::moveDown()
+Movement Enemy::getSelect() { return this->select; }
+
+Movement Enemy::getNewSelect() { return this->newSelect; }
+
+void Enemy::moveDown()
 {
     this->position.second += downSpeed;
-    bool flag = true;
     if(position.second > HEIGHT - DOWNPANEL_H)
     {
-        scene()->removeItem(this);
-        delete this;
-        flag = false;
+        emit destroyed();
         qDebug() << "Enemy removed and deleted!";
+        return;
     }
-    return flag;
-}
+	emit moved();
 
-bool Enemy::moveRight()
-{
-    bool flag = true;
-    if(position.first <= WIDTH + 2 * size.first)
-        this->position.first += speed;
-    else
-    {
-        scene()->removeItem(this);
-        delete this;
-        flag = false;
-        qDebug() << "Enemy removed and deleted!";
-    }
-    return flag;
-}
-
-bool Enemy::moveLeft()
-{
-    bool flag = true;
-    if(position.first + size.first > 0)
-        this->position.first -= speed;
-    else
-    {
-        scene()->removeItem(this);
-        delete this;
-        flag = false;
-        qDebug() << "Enemy removed and deleted!";
-    }
-    return flag;
-}
-
-void Enemy::checkLosing()
-{
-    QList<QGraphicsItem*> check = collidingItems();
-    int n = check.size();
-    for(int i = 0; i < n; i++)
-    {
-        if(typeid(*(check[i])) == typeid(Player))
-        {
-            qDebug() << "This is a player item!";
-            qDebug() << "You LOSE!";
-
-            exit(0);
-            scene()->removeItem(check[i]);
-            scene()->removeItem(this);
-            delete check[i];
-            delete this;
-            exit(0);
-            return;
-        }
-    }
 }
 
 Enemy::~Enemy() {}
 
-void Enemy::move()
+Ship::Ship(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
-    this->checkLosing();
-    downSpeed += 0.01;
-    bool flag;
-    switch(this->select)
-    {
-    case DOWN:
-        flag = this->moveDown();
-        break;
-    case LEFT:
-        flag = this->moveLeft() && this->moveDown();
-        break;
-    case RIGHT:
-        flag = this->moveRight() && this->moveDown();
-        break;
-    }
-    if(flag)
-        setPos(position.first, position.second);
-    if(position.second >= movingPos && select != newSelect)
-        select = newSelect;
+	this->position = position;
+	this->select = select;
+	this->newSelect = newSelect;
+	this->movingPos = movingPos;
+	timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
+	timer->start(20);
 }
 
-Ship::Ship(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
+Helicopter::Helicopter(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
-    this->position.first = x;
-    this->position.second = y;
-    this->size.first = width;
-    this->size.second = height;
-    this->select = select;
-    this->newSelect = newSelect;
-    this->movingPos = movingPos;
-//    setRect(0, 0, width, height);
-    setPos(x, y);
-    if(newSelect == LEFT)
-        setPixmap(QPixmap(":/images/shipleft.png"));
-    else
-        setPixmap(QPixmap(":/images/shipright.png"));
-    setScale(0.11);
-    this->timer = new QTimer();
-    this->speed = 15;
-//    this->downSpeed = downSpeed;
-//    this->downSpeed = 4;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(30);
+	this->position = position;
+	this->select = select;
+	this->newSelect = newSelect;
+	this->movingPos = movingPos;
+	timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
+	timer->start(20);
+
 }
 
-Jet::Jet(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
+Balloon::Balloon(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
-    this->position.first = x;
-    this->position.second = y;
-    this->size.first = width;
-    this->size.second = height;
-    this->select = select;
-    this->newSelect = newSelect;
-    this->movingPos = movingPos;
-//    setRect(0, 0, width, height);
-    setPos(x, y);
-    if(newSelect == LEFT)
-        setPixmap(QPixmap(":/images/jetleft.png"));
-    else
-        setPixmap(QPixmap(":/images/jetright.png"));
-    setScale(0.17);
+	this->position = position;
+	this->select = select;
+	this->newSelect = newSelect;
+	this->movingPos = movingPos;
+	timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
+	timer->start(20);
 
-    this->timer = new QTimer();
-    this->speed = 15;
-//    this->downSpeed = downSpeed;
-//    this->downSpeed = 4;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(30);
 }
 
-Helicopter::Helicopter(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
+Jet::Jet(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {
-    this->position.first = x;
-    this->position.second = y;
-    this->size.first = width;
-    this->size.second = height;
-    this->select = select;
-    this->newSelect = newSelect;
-    this->movingPos = movingPos;
-//    setRect(0, 0, width, height);
-    setPos(x, y);
-    if(newSelect == LEFT)
-        setPixmap(QPixmap(":/images/helicopterright.png"));
-    else
-        setPixmap(QPixmap(":/images/helicopterleft.png"));
-    setScale(0.85);
+	this->position = position;
+	this->select = select;
+	this->newSelect = newSelect;
+	this->movingPos = movingPos;
+	timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
+	timer->start(20);
 
-    this->timer = new QTimer();
-//    this->downSpeed = downSpeed;
-    this->speed = 15;
-//    this->downSpeed = 4;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(30);
-}
-
-Balloon::Balloon(int x, int y, unsigned int width, unsigned int height, int movingPos, double downSpeed, Movement select, Movement newSelect)
-{
-    this->position.first = x;
-    this->position.second = y;
-    this->size.first = width;
-    this->size.second = height;
-    this->select = select;
-    this->newSelect = newSelect;
-    this->movingPos = movingPos;
-//    setRect(0, 0, width, height);
-    setPixmap(QPixmap(":/images/balloon.png"));
-    setScale(0.06);
-    setPos(x, y);
-    this->timer = new QTimer();
-//    this->downSpeed = downSpeed;
-    this->speed = 15;
-//    this->downSpeed = 4;
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(30);
 }
