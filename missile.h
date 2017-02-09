@@ -13,16 +13,19 @@ class missile:public QObject,  public QGraphicsRectItem
 private:
     int x;
     int y;
-    int height;
-    int width;
+//    static int num;
     QTimer* timer;
     Player *player;
 public:
-    missile(int x, int y, int width, int height, Player *player);
+    missile(int x, int y,  Player *player);
     int get_x();
+//    int get_num();
     int get_y();
     ~missile();
     int get_height();
+signals:
+    void m_removed();
+    void m_moved();
 public slots:
     void move_up();
 };
