@@ -17,13 +17,13 @@ private:
     QTimer* timer;
     Player *player;
 public:
-    missile(int x, int y,  Player *player);
+    missile(int x, int y);
     int get_x();
 //    int get_num();
     int get_y();
     ~missile();
     int get_height();
-    Player *getPlayer();
+    void stopTimer();
 signals:
     void m_removed();
     void m_moved();
