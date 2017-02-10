@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>b_panel.jpg</file>
+        <file>F.jpg</file>
+        <file>needle.png</file>
+        <file>heli.png</file>
+        <file>helileft.png</file>
+        <file>heliright.png</file>
+        <file>balloon.png</file>
+        <file>helicopterleft.png</file>
+        <file>helicopterright.png</file>
+        <file>shipleft.png</file>
+        <file>shipright.png</file>
+        <file>jetleft.png</file>
+        <file>jetright.png</file>
+        <file>gas.png</file>
+        <file>missile.png</file>
+    </qresource>
+</RCC>
