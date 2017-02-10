@@ -1,3 +1,4 @@
+//
 #include "button.h"
 #include <QObject>
 #include <QPixmap>
