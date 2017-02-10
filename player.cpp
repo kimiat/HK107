@@ -114,6 +114,7 @@ void Player::keyRelease(QKeyEvent *direction)
 void Player::addScore(Object destroyed)
 {
     score->addScore(destroyed);
+    emit scoreChanged();
 }
 
 int Player::getScore()

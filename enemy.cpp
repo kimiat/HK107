@@ -38,7 +38,7 @@ void Enemy::moveDown()
     if(position.second > HEIGHT - DOWNPANEL_H)
     {
         emit destroyed();
-        qDebug() << "Enemy removed and deleted!";
+//        qDebug() << "Enemy removed and deleted!";
         delete this;
         return;
     }

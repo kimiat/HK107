@@ -33,20 +33,20 @@ public:
     void keyPress(QKeyEvent *direction);
     void keyRelease(QKeyEvent *direction);
     void addScore(Object destroyed);
-    int getScore();
 signals:
     void changeLeft();
     void changeRight();
     void straight();
     void positionChanged(int xVal);
     void shoot_m();
-
+    void scoreChanged();
 //    void m_move();
 //    void m_remove();
 public slots:
     void emit_shoot();
     void move_left();
     void move_right();
+    int getScore();
 //    void shoot();
 //    void emit_move();
 //    void emit_remove();

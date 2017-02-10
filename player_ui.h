@@ -16,6 +16,7 @@ public:
     p_ui();
     void keyPressEvent(QKeyEvent *direction);
     void keyReleaseEvent(QKeyEvent *direction);
+    Player* get_p();
 public slots:
     void changePos();
     void setPicLeft();

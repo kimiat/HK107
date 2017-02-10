@@ -31,9 +31,14 @@ void p_ui::keyReleaseEvent(QKeyEvent *direction)
     p->keyRelease(direction);
 }
 
+Player* p_ui::get_p()
+{
+    return p;
+}
+
 void p_ui::changePos()
 {
-    cout << "in the changepos " << endl;
+//    cout << "in the changepos " << endl;
     setPos(p->get_x(), p->get_y());
 }
 
@@ -49,7 +54,7 @@ void p_ui::setPicRight()
 
 void p_ui::create_m()
 {
-    m_ui* Missile = new m_ui(p->get_x() + 20, p->get_y() - 15, p);
+    m_ui* Missile = new m_ui(p->get_x() + 20, p->get_y() - 15);
     scene()->addItem(Missile);
 }
 
