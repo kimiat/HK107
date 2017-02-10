@@ -9,7 +9,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QLabel>
 
-enum BtnType {PLAY = 1, HIGHSCORES = 2, CREDITS = 3, EXIT = 4};
+enum BtnType {PLAY = 1, HIGHSCORES = 2, CREDITS = 3, EXIT = 4, BACK = 5};
 
 class menu_button: public QObject, public QGraphicsPixmapItem
 {
@@ -24,6 +24,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    ~menu_button();
 public slots:
     void changeColour();
     void changeColourBack();
@@ -32,6 +33,7 @@ signals:
     void scoresclicked();
     void creditsclicked();
     void exitclicked();
+    void backclicked();
 };
 
 #endif

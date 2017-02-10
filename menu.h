@@ -25,12 +25,15 @@ private:
     Setup *setup;
 public:
     Menu();
+    void start();
     QGraphicsScene *getScene();
+    ~Menu();
 public slots:
     void play();
     void score();
     void credits();
     void quit();
+    void back();
 };
 
 #endif

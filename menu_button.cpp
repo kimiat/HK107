@@ -26,12 +26,15 @@ menu_button::menu_button(int x, int y, BtnType type, qreal rotate)
         setPixmap(QPixmap(":/images/credits.png"));
     else if(type == EXIT)
         setPixmap(QPixmap(":/images/exit.png"));
+    else if(type == BACK)
+        setPixmap(QPixmap(":/images/back.png"));
     this->type = type;
     setRotation(rotate);
     setPos(x, y);
     setScale(0.3);
     setZValue(13);
     setAcceptHoverEvents(true);
+    timer = b_timer = NULL;
 }
 
 void menu_button::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -44,6 +47,8 @@ void menu_button::mousePressEvent(QGraphicsSceneMouseEvent *event)
         setPixmap(QPixmap(":/images/creditslight.png"));
     else if(type == EXIT)
         setPixmap(QPixmap(":/images/exitlight.png"));
+    else if(type == BACK)
+        setPixmap(QPixmap(":/images/backlight.png"));
     setScale(0.3);
     timer = new QTimer();
     timer->start(200);
@@ -60,6 +65,8 @@ void menu_button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         setPixmap(QPixmap(":/images/creditslight.png"));
     else if(type == EXIT)
         setPixmap(QPixmap(":/images/exitlight.png"));
+    else if(type == BACK)
+        setPixmap(QPixmap(":/images/backlight.png"));
 }
 
 void menu_button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
@@ -72,6 +79,16 @@ void menu_button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
         setPixmap(QPixmap(":/images/credits.png"));
     else if(type == EXIT)
         setPixmap(QPixmap(":/images/exit.png"));
+    else if(type == BACK)
+        setPixmap(QPixmap(":/images/back.png"));
+}
+
+menu_button::~menu_button()
+{
+    if(timer != NULL)
+        delete timer;
+    if(b_timer != NULL)
+        delete b_timer;
 }
 
 void menu_button::changeColour()
@@ -84,6 +101,8 @@ void menu_button::changeColour()
         setPixmap(QPixmap(":/images/credits.png"));
     else if(type == EXIT)
         setPixmap(QPixmap(":/images/exit.png"));
+    else if(type == BACK)
+        setPixmap(QPixmap(":/images/back.png"));
     setScale(0.3);
     b_timer = new QTimer();
     b_timer->start(100);
@@ -100,4 +119,6 @@ void menu_button::changeColourBack()
         emit creditsclicked();
     else if(type == EXIT)
         emit exitclicked();
+    else if(type == BACK)
+        emit backclicked();
 }
