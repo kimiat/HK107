@@ -17,13 +17,12 @@ public:
     void keyPressEvent(QKeyEvent *direction);
     void keyReleaseEvent(QKeyEvent *direction);
     Player* get_p();
+    ~p_ui();
 public slots:
     void changePos();
     void setPicLeft();
     void setPicRight();
-//    void showMissile();
     void create_m();
-//    void removeMissile();
     void setPicStraight();
 
 };

@@ -11,8 +11,6 @@ class m_ui: public QObject,public QGraphicsPixmapItem{
 private:
     missile* m;
     QMediaPlayer* sound;
-    QTimer* explosion;
-//    int shot_num;
 public:
     m_ui(int x, int y);
     ~m_ui();

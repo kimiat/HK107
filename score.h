@@ -13,4 +13,5 @@ public:
 	Score();
 	unsigned int getScore();
 	void addScore(Object destroyed);
+    void setZero();
 };

@@ -26,14 +26,19 @@ public:
     QGraphicsPixmapItem* getGauge();
     QGraphicsPixmapItem* getNeedle();
     QLCDNumber* getScore();
+    bool over;
     void addScore();
     fuel* getFuel();
+    ~panel();
+signals:
+    void gameover();
 public slots:
     void set_posl();
     void set_posr();
     void play_sound();
     void stop_sound();
     void setScore();
+    void stopMoving();
 };
 
 #endif // BOTTOM_PANEL

@@ -28,10 +28,12 @@ signals:
     void stop();
 public:
     Tank(int x, int y,double downSpeed, Player* p);
+    ~Tank();
 public slots:
     void move();
     void check_c();
     void explode();
+    void stopMoving();
 };
 
 #endif

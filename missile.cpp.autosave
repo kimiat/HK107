@@ -17,10 +17,11 @@ using namespace std;
 
 int num = 0;
 
-missile::missile(int x, int y)
+missile::missile(int x, int y, Player *player)
 {
     this->x = x;
     this->y = y;
+    this->player = player;
     num++;
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move_up()));
@@ -44,6 +45,7 @@ void missile::move_up()
     if(get_y() < -20)
     {
         emit m_removed();
+        delete this;
     }
 }
 
@@ -52,10 +54,3 @@ missile::~missile()
     delete timer;
     num--;
 }
-
-void missile::stopTimer()
-{
-    timer->stop();
-}
-
-

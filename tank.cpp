@@ -35,6 +35,14 @@ Tank::Tank(int x, int y, double downSpeed, Player* p)
     sound->setMedia(QUrl("qrc:/sound/explode.mp3"));
 }
 
+Tank::~Tank()
+{
+    delete check;
+    delete exp;
+    delete sound;
+    delete timer;
+}
+
 void Tank::move()
 {
     QList<QGraphicsItem*> items = collidingItems();
@@ -127,4 +135,10 @@ void Tank::explode()
         setScale(1.2);
         shot_num++;
     }
+}
+
+void Tank::stopMoving()
+{
+    timer->stop();
+    check->stop();
 }

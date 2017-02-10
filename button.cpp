@@ -34,6 +34,13 @@ Button::Button(int x, int y, QString text, QGraphicsScene *scene)
     setAcceptHoverEvents(true);
 }
 
+Button::~Button()
+{
+    delete label;
+    delete timer;
+    delete b_timer;
+}
+
 //void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //{
 ////    scene()->removeItem(this);

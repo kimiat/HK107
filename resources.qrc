@@ -15,5 +15,33 @@
         <file>jetright.png</file>
         <file>gas.png</file>
         <file>missile.png</file>
+        <file>lcd.jpeg</file>
+        <file>buttonlight.png</file>
+        <file>button.png</file>
+        <file>background.png</file>
+        <file>map.png</file>
+    </qresource>
+    <qresource prefix="/sound">
+        <file>getFuel.wav</file>
+        <file>shoot.wav</file>
+        <file>explode.mp3</file>
+    </qresource>
+    <qresource prefix="/explosion">
+        <file>e1.png</file>
+        <file>e2.png</file>
+        <file>e4.png</file>
+        <file>e3.png</file>
+        <file>e5.png</file>
+        <file>e6.png</file>
+        <file>e7.png</file>
+        <file>e16.png</file>
+        <file>e15.png</file>
+        <file>e14.png</file>
+        <file>e13.png</file>
+        <file>e12.png</file>
+        <file>e11.png</file>
+        <file>e10.png</file>
+        <file>e9.png</file>
+        <file>e8.png</file>
     </qresource>
 </RCC>

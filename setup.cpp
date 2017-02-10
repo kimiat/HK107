@@ -26,7 +26,7 @@
 int height = 700;
 int width = 1000;
 
-pair<int, int> startingPos = make_pair(50, 950);
+pair<int, int> startingPos = make_pair(230, 650);
 pair<int, int> startingTime = make_pair(700, 1500);
 pair<int, int> movingPos = make_pair(50, 600);
 
@@ -46,10 +46,16 @@ Setup::Setup()
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scene->addItem(player);
-    Panel = new panel();
+    Panel = new panel(player->get_p());
     scene->addItem(Panel);
     scene->addItem(Panel->getGauge());
     scene->addItem(Panel->getNeedle());
+    connect(Panel, SIGNAL(gameover()), this, SLOT(endGame()));
+    connect(player->get_p(), SIGNAL(gameover()), this, SLOT(endGame()));
+    connect(this, SIGNAL(endgame()), Panel, SLOT(stopMoving()));
+    scene->setBackgroundBrush(QImage(":images/map.png"));
+    Panel->addScore();
+    connect(this, SIGNAL(endgame()), player->get_p(), SLOT(stopMoving()));
 //    scene->addItem(Panel->getNeedle());
 }
 
@@ -95,6 +101,15 @@ void Setup::drawImage(int x, int y)
     scene->addItem(window);
 }
 
+Setup::~Setup()
+{
+    delete scene;
+    delete player;
+    delete view;
+    delete Panel;
+    delete timer;
+}
+
 void Setup::newEnemies()
 {
     srand(time(NULL));
@@ -110,8 +125,9 @@ void Setup::newEnemies()
     randMove = rand() % 10;
     if(!randTank)
     {
-        Tank *tank = new Tank(randPos, 0, 20, 60, downSpeed);
+        Tank *tank = new Tank(randPos, 0, downSpeed, player->get_p());
         connect(tank, SIGNAL(getFuel()), Panel->getFuel(), SLOT(inc_fuel()));
+        connect(this, SIGNAL(endgame()), tank, SLOT(stopMoving()));
         this->scene->addItem(tank);
         return;
     }
@@ -124,35 +140,42 @@ void Setup::newEnemies()
     e_ui *enemyui = NULL;
     if(randType == 0)
     {
-        enemyui = new s_ui(make_pair(randPos, 0), SHIP_E);
+        enemyui = new s_ui(make_pair(randPos, 0), player->get_p());
+        connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
+        connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
+        connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
         connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     }
     else if(randType == 1)
     {
-        enemyui = new h_ui(make_pair(randPos, 0), HELICOPTER_E);
+        enemyui = new h_ui(make_pair(randPos, 0), player->get_p());
         connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     }
     else if(randType == 2 && moveType == LEFT)
     {
-        enemyui = new j_ui(make_pair(randPos, 0), JET_E);
+        enemyui = new j_ui(make_pair(randPos, 0), player->get_p());
         connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     }
     else if(randType == 2 && moveType == RIGHT)
     {
-        enemyui = new j_ui(make_pair(randPos, 0), JET_E);
+        enemyui = new j_ui(make_pair(randPos, 0), player->get_p());
         connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     }
     else if(randType == 3)
     {
-        enemyui = new b_ui(make_pair(randPos, 0), BALLOON_E);
+        enemyui = new b_ui(make_pair(randPos, 0), player->get_p());
         connect(enemyui, SIGNAL(gameover()), this, SLOT(endGame()));
     }
     if(enemyui != NULL)
+    {
+        connect(this, SIGNAL(endgame()), enemyui, SLOT(stopMoving()));
         this->scene->addItem(enemyui);
+    }
 }
 
 void Setup::endGame()
 {
+    emit endgame();
     int n = scene->items().size();
     for(int i = 0; i < n; i++)
         scene->items()[i]->setEnabled(false);
@@ -201,12 +224,24 @@ void Setup::exitGame()
 
 void Setup::restartGame()
 {
+    int n = scene->items().size();
+    for(int i = 0; i < n; i++)
+    {
+        scene->removeItem(scene->items()[i]);
+    cout << "i is " << i << endl;
+    }
+
 //    delete player->get_p()->score; //should set score to zero
     delete player;
+    cout << "playerrrrr deleteed" << endl;
     delete Panel;
+    cout << "panel deleted " << endl;
     delete timer;
+    cout << "timer deleted " << endl;
     delete scene;
+    cout << "scene deleted " << endl;
     delete view;
+    cout << "view deleted " << endl;
 
     scene = new QGraphicsScene();
     player = new p_ui();
@@ -219,10 +254,16 @@ void Setup::restartGame()
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scene->addItem(player);
-    Panel = new panel();
+    Panel = new panel(player->get_p());
     scene->addItem(Panel);
     scene->addItem(Panel->getGauge());
     scene->addItem(Panel->getNeedle());
     view->show();
     this->makeEnemies();
+    connect(Panel, SIGNAL(gameover()), this, SLOT(endGame()));
+    connect(player->get_p(), SIGNAL(gameover()), this, SLOT(endGame()));
+    connect(this, SIGNAL(endgame()), player->get_p(), SLOT(stopMoving()));
+    connect(this, SIGNAL(endgame()), Panel, SLOT(stopMoving()));
+    scene->setBackgroundBrush(QImage(":images/map.png"));
+    Panel->addScore();
 }

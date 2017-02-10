@@ -34,6 +34,7 @@ public slots:
     void remove();
     void check_c();
     void explode();
+    void stopMoving();
 signals:
     void gameover();
 };

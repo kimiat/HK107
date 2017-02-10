@@ -121,24 +121,32 @@ void e_ui::explode()
     }
 }
 
+void e_ui::stopMoving()
+{
+    enemy->stopTimer();
+}
+
 void e_ui::checkLosing()
 {
-    QList<QGraphicsItem*> check = collidingItems();
-    int n = check.size();
-    for(int i = 0; i < n; i++)
+    if(isRemoved == false)
     {
-        if(typeid(*(check[i])) == typeid(Player) && !gameOver)
+        QList<QGraphicsItem*> check = collidingItems();
+        int n = check.size();
+        for(int i = 0; i < n; i++)
         {
-            cout << "This is a player item!";
-            cout << "You LOSE!";
-            emit gameover();
-            gameOver = true;
-//            exit(0);
-//            scene()->removeItem(check[i]);
-//            scene()->removeItem(this);
-//            delete check[i];
-//            delete this;
-//            return;
+            if(typeid(*(check[i])) == typeid(p_ui) && !gameOver)
+            {
+                cout << "This is a player item!";
+                cout << "You LOSE!";
+                emit gameover();
+                gameOver = true;
+    //            exit(0);
+    //            scene()->removeItem(check[i]);
+    //            scene()->removeItem(this);
+    //            delete check[i];
+    //            delete this;
+    //            return;
+            }
         }
     }
 }
@@ -150,6 +158,10 @@ Player *e_ui::getPlayer()
 
 e_ui::~e_ui()
 {
+    delete enemy;
+    delete check;
+    delete exp;
+    delete sound;
 //    cout << "it is over " << endl;
 }
 

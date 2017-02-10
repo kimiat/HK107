@@ -12,3 +12,8 @@ void Score::addScore(Object destroyed){
     value += destroyed;
     cout << "value is " <<destroyed << endl;
 }
+
+void Score::setZero()
+{
+    value = 0;
+}

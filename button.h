@@ -20,6 +20,7 @@ private:
 public:
     Button();
     Button(int x, int y, QString text, QGraphicsScene *scene);
+    ~Button();
 //    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
 //    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

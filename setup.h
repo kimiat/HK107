@@ -26,6 +26,9 @@ public:
     void makeEnemies();
     void drawWindow(int x, int y, int width, int height, double opacity, QColor colour);
     void drawImage(int x, int y);
+    ~Setup();
+signals:
+    void endgame();
 public slots:
     void newEnemies();
     void endGame();

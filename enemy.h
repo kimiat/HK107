@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int HEIGHT = 600;
+const int HEIGHT = 700;
 const int WIDTH = 800;
 
 static double downSpeed = 3;
@@ -32,6 +32,7 @@ public:
     int getMovingPos();
     Movement getSelect();
     Movement getNewSelect();
+    void stopTimer();
 	~Enemy();
 signals:
 	void moved();

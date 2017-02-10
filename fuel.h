@@ -15,9 +15,11 @@ class fuel:public QObject, public QGraphicsRectItem{
         void fuelDec(int changed_amount);
     public:
         fuel();
+        ~fuel();
     public slots:
         void inc_fuel();
         void dec_fuel();
+        void stopTimer();
 //        void move_down();
 };
 

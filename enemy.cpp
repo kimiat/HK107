@@ -32,20 +32,27 @@ Movement Enemy::getSelect() { return this->select; }
 
 Movement Enemy::getNewSelect() { return this->newSelect; }
 
+void Enemy::stopTimer()
+{
+    timer->stop();
+}
+
 void Enemy::moveDown()
 {
     this->position.second += downSpeed;
-    if(position.second > HEIGHT - DOWNPANEL_H)
+    if(position.second > HEIGHT )
     {
         emit destroyed();
 //        qDebug() << "Enemy removed and deleted!";
-        delete this;
+//        delete this;
         return;
     }
 	emit moved();
 }
 
-Enemy::~Enemy() {}
+Enemy::~Enemy() {
+    delete timer;
+}
 
 Ship::Ship(pair<int, int> position, int movingPos, double downSpeed, Movement select, Movement newSelect)
 {

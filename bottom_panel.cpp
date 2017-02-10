@@ -9,6 +9,7 @@
 using namespace std;
 panel::panel(Player* p)
 {
+    over = false;
     player = p;
     gauge = new QGraphicsPixmapItem();
     gauge->setPixmap(QPixmap(":/images/F.jpg"));
@@ -70,11 +71,36 @@ fuel *panel::getFuel()
     return amount;
 }
 
+panel::~panel()
+{
+    delete gauge;
+    cout << "after1" << endl;
+    delete needle;
+    cout << "after2" << endl;
+    delete score;
+    cout << "after3" << endl;
+    delete proxy;
+    cout << "after4" << endl;
+    delete amount;
+    cout << "after5" << endl;
+    delete fuel_sound;
+}
+
 
 void panel::set_posl()
 {
-    if(needle->x() > s_width/2 - 54)
-    needle->setPos(needle->x() - 1.3, needle->y());
+    if(needle->x() > s_width/2 - 55)
+    {
+//        cout << " je"
+        needle->setPos(needle->x() - 2, needle->y());
+//        cout << "x is " << needle->x() << endl;
+    }
+    else if(over == false)
+    {
+        emit gameover();
+        over = true;
+//        cout << " it is game over ddddddddddddddd" << endl;
+    }
 //    cout << "pos is " << needle->x() << endl;
 }
 
@@ -102,5 +128,10 @@ void panel::stop_sound()
 void panel::setScore()
 {
     score->display(player->getScore());
+}
+
+void panel::stopMoving()
+{
+    amount->stopTimer();
 }
 

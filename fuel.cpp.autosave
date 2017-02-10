@@ -10,11 +10,6 @@ fuel::fuel()
     dfuel_timer->start(300);
 }
 
-fuel::~fuel()
-{
-    delete dfuel_timer;
-}
-
 void fuel::inc_fuel()
 {
     if(fuel_amount < 480)
@@ -31,9 +26,4 @@ void fuel::dec_fuel()
         fuel_amount -= 5;
         emit fuelDec(fuel_amount);
     }
-}
-
-void fuel::stopTimer()
-{
-    dfuel_timer->stop();
 }

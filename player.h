@@ -13,8 +13,6 @@ class Player :public QObject{
 private:
     int x;
     int y;
-//    int height;
-//    int width;
     int fuel;
     Score *score;
     QTimer* left_timer;
@@ -22,17 +20,17 @@ private:
     QTimer* shoot_timer;
     QTimer* ifuel_timer;
     QTimer* dfuel_timer;
-//    missile* m;
 public:
     Player(int x, int y);
     int get_x();
     int get_y();
     int get_height();
     int get_width();
-//    missile* get_m();
+    bool over;
     void keyPress(QKeyEvent *direction);
     void keyRelease(QKeyEvent *direction);
     void addScore(Object destroyed);
+    ~Player();
 signals:
     void changeLeft();
     void changeRight();
@@ -40,16 +38,13 @@ signals:
     void positionChanged(int xVal);
     void shoot_m();
     void scoreChanged();
-//    void m_move();
-//    void m_remove();
+    void gameover();
 public slots:
     void emit_shoot();
     void move_left();
     void move_right();
     int getScore();
-//    void shoot();
-//    void emit_move();
-//    void emit_remove();
+    void stopMoving();
 };
 
 #endif
