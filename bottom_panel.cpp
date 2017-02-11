@@ -51,9 +51,9 @@ QGraphicsPixmapItem *panel::getNeedle()
     return needle;
 }
 
-QLCDNumber* panel::getScore()
+QGraphicsProxyWidget* panel::getScore()
 {
-    return score;
+    return proxy;
 }
 
 void panel::addScore()
@@ -79,11 +79,12 @@ panel::~panel()
     cout << "after2" << endl;
     delete score;
     cout << "after3" << endl;
-    delete proxy;
+//    delete proxy;
     cout << "after4" << endl;
     delete amount;
     cout << "after5" << endl;
     delete fuel_sound;
+    cout << "afterthis " << endl;
 }
 
 

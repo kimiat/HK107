@@ -24,8 +24,8 @@ public:
     QGraphicsScene *getScene();
     void start();
     void makeEnemies();
-    void drawWindow(int x, int y, int width, int height, double opacity, QColor colour);
-    void drawImage(int x, int y);
+    QGraphicsRectItem* drawWindow(int x, int y, int width, int height, double opacity, QColor colour);
+    QGraphicsPixmapItem* drawImage(int x, int y);
     ~Setup();
 signals:
     void endgame();

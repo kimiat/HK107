@@ -25,7 +25,7 @@ public:
     panel(Player* p);
     QGraphicsPixmapItem* getGauge();
     QGraphicsPixmapItem* getNeedle();
-    QLCDNumber* getScore();
+    QGraphicsProxyWidget*  getScore();
     bool over;
     void addScore();
     fuel* getFuel();

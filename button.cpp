@@ -32,13 +32,16 @@ Button::Button(int x, int y, QString text, QGraphicsScene *scene)
     label->setAttribute(Qt::WA_TranslucentBackground);
     proxy->setZValue(7);
     setAcceptHoverEvents(true);
+    b_timer = timer = NULL;
 }
 
 Button::~Button()
 {
     delete label;
-    delete timer;
-    delete b_timer;
+    if(timer != NULL)
+        delete timer;
+    if(b_timer != NULL)
+        delete b_timer;
 }
 
 //void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)

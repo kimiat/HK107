@@ -17,6 +17,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <QPixmap>
+#include <typeinfo>
 #include <QGraphicsProxyWidget>
 
 #define p_height 50
@@ -80,7 +81,7 @@ void Setup::makeEnemies()
 }
 
 
-void Setup::drawWindow(int x, int y, int width, int height, double opacity, QColor colour)
+QGraphicsRectItem* Setup::drawWindow(int x, int y, int width, int height, double opacity, QColor colour)
 {
     QGraphicsRectItem *window = new QGraphicsRectItem(x, y, width, height);
     QBrush brush;
@@ -89,9 +90,10 @@ void Setup::drawWindow(int x, int y, int width, int height, double opacity, QCol
     window->setBrush(brush);
     window->setOpacity(opacity);
     scene->addItem(window);
+    return window;
 }
 
-void Setup::drawImage(int x, int y)
+QGraphicsPixmapItem* Setup::drawImage(int x, int y)
 {
     QGraphicsPixmapItem *window = new QGraphicsPixmapItem();
     window->setPixmap(QPixmap(":/images/background.png"));
@@ -99,6 +101,7 @@ void Setup::drawImage(int x, int y)
     window->setScale(0.32);
     window->setZValue(2);
     scene->addItem(window);
+    return window;
 }
 
 Setup::~Setup()
@@ -173,6 +176,12 @@ void Setup::newEnemies()
     }
 }
 
+Button *playAgain, *quit, *mainMenu;
+QLabel *yourscore, *gameover;
+QGraphicsProxyWidget *proxy;
+QGraphicsRectItem* window;
+QGraphicsPixmapItem* image;
+
 void Setup::endGame()
 {
     emit endgame();
@@ -180,24 +189,31 @@ void Setup::endGame()
     for(int i = 0; i < n; i++)
         scene->items()[i]->setEnabled(false);
     this->timer->stop();
-    this->drawWindow(0, 0, 1000, 700, 0.07, Qt::black);
-    this->drawWindow(250, 125, 500, 350, 0.2, Qt::lightGray);
-    this->drawImage(200, 110);
-    Button *playAgain = new Button(362, 353, QString("Play Again"), scene);
+    window = this->drawWindow(0, 0, 1000, 700, 0.07, Qt::black);
+//    this->drawWindow(250, 125, 500, 350, 0.2, Qt::lightGray);
+    image = this->drawImage(200, 110);
+
+    playAgain = new Button(362, 353, QString("Play Again"), scene);
     connect(playAgain, SIGNAL(clicked()), this, SLOT(restartGame()));
     playAgain->setPos(350, 350);
     scene->addItem(playAgain);
-    Button *quit = new Button(582, 353, QString("Quit"), scene);
+
+    quit = new Button(582, 353, QString("Quit"), scene);
     connect(quit, SIGNAL(clicked()), this, SLOT(exitGame()));
     quit->setPos(550, 350);
     scene->addItem(quit);
-    QLabel *gameover, *yourscore;
+
+    mainMenu = new Button(453, 392, QString("Main Menu"), scene);
+    connect(mainMenu, SIGNAL(clicked()), this, SLOT(restartGame()));
+    mainMenu->setPos(445, 391);
+    scene->addItem(mainMenu);
+
     yourscore = new QLabel();
     gameover = new QLabel();
     gameover->setText("Game Over!");
     yourscore->setText("Your score is: ");
 
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget;
+    proxy = new QGraphicsProxyWidget;
     QFont font;
     font.setPointSize(17);
     gameover->setFont(font);
@@ -225,19 +241,51 @@ void Setup::exitGame()
 void Setup::restartGame()
 {
     int n = scene->items().size();
-    for(int i = 0; i < n; i++)
-    {
-        scene->removeItem(scene->items()[i]);
-    cout << "i is " << i << endl;
-    }
+    cout << "n is " << n << endl;
+//    scene->clear();
+//    cout << "hereeee" << endl;
+//    for(int i = 0; i < n; i++)
+//    {
+//        scene->removeItem(scene->items()[i]);
+//    cout << "i is " << i << endl;
+//    }
+
 
 //    delete player->get_p()->score; //should set score to zero
+    cout << "hereeee" << endl;
+    scene->removeItem(player);
+    cout << "afterplauer " << endl;
     delete player;
     cout << "playerrrrr deleteed" << endl;
+    scene->removeItem(Panel->getGauge());
+    scene->removeItem(Panel->getNeedle());
+    scene->removeItem(Panel->getScore());
+    scene->removeItem(Panel);
     delete Panel;
     cout << "panel deleted " << endl;
     delete timer;
     cout << "timer deleted " << endl;
+    delete playAgain;
+    cout << "first button deleted\n";
+    delete mainMenu;
+    delete quit;
+    delete yourscore;
+    delete gameover;
+    delete window;
+    delete image;
+//    delete proxy;
+     n = scene->items().size();
+     cout << "now n is: " << n << endl;
+     QList<QGraphicsItem*> all = scene->items();
+     for(int i = 0; i < all.size(); i++)
+         if(typeid(*all[i]) == typeid(e_ui) || typeid(*all[i]) == typeid(Tank))
+         {
+             scene->removeItem(all[i]);
+             cout << "enemy " << endl;
+         }
+//    cout << "n is " << n << endl;
+//    scene->clear();
+    cout << "cleared" << endl;
     delete scene;
     cout << "scene deleted " << endl;
     delete view;
